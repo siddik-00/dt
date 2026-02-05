@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-vite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel-vite
+  template:
+    metadata:
+      labels:
+        app: laravel-vite
+    spec:
+      containers:
+        - name: laravel
+          image: siddik3241/laravel-vite:latest
+          ports:
+            - containerPort: 8000   # Laravel
+            - containerPort: 5173   # Vite
+          env:
+            - name: APP_URL
+              value: http://localhost:8000
