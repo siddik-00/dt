@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: laravel-vite
+  name: s-cart-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: laravel-vite
+      app: s-cart
   template:
     metadata:
       labels:
-        app: laravel-vite
+        app: s-cart
     spec:
       containers:
-        - name: laravel
-          image: siddik3241/laravel-vite:latest
-          ports:
-            - containerPort: 8000   # Laravel
-            - containerPort: 5173   # Vite
-          env:
-            - name: APP_URL
-              value: http://localhost:8000
+      - name: s-cart
+        image: siddikdev/s-cart:v1
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: s-cart-config
